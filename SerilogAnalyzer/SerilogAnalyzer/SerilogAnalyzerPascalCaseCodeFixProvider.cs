@@ -34,7 +34,7 @@ namespace SerilogAnalyzer
         private const char destructuringPrefix = '@';
         private const string title = "Pascal case the property";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SerilogAnalyzerAnalyzer.PascalPropertyNameDiagnosticId);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(StructuredLoggerAnalyzer.PascalPropertyNameDiagnosticId);
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {

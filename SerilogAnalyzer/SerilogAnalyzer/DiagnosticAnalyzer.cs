@@ -25,51 +25,51 @@ using Microsoft.CodeAnalysis.Text;
 namespace SerilogAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class SerilogAnalyzerAnalyzer : DiagnosticAnalyzer
+    public class StructuredLoggerAnalyzer : DiagnosticAnalyzer
     {
-        public const string ExceptionDiagnosticId = "Serilog001";
+        public const string ExceptionDiagnosticId = "StructuredLogger001";
         private static readonly LocalizableString ExceptionTitle = new LocalizableResourceString(nameof(Resources.ExceptionAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString ExceptionMessageFormat = new LocalizableResourceString(nameof(Resources.ExceptionAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString ExceptionDescription = new LocalizableResourceString(nameof(Resources.ExceptionAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
         private static DiagnosticDescriptor ExceptionRule = new DiagnosticDescriptor(ExceptionDiagnosticId, ExceptionTitle, ExceptionMessageFormat, "CodeQuality", DiagnosticSeverity.Warning, isEnabledByDefault: true, description: ExceptionDescription);
 
-        public const string TemplateDiagnosticId = "Serilog002";
+        public const string TemplateDiagnosticId = "StructuredLogger002";
         private static readonly LocalizableString TemplateTitle = new LocalizableResourceString(nameof(Resources.TemplateAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString TemplateMessageFormat = new LocalizableResourceString(nameof(Resources.TemplateAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString TemplateDescription = new LocalizableResourceString(nameof(Resources.TemplateAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
         private static DiagnosticDescriptor TemplateRule = new DiagnosticDescriptor(TemplateDiagnosticId, TemplateTitle, TemplateMessageFormat, "CodeQuality", DiagnosticSeverity.Error, isEnabledByDefault: true, description: TemplateDescription);
 
-        public const string PropertyBindingDiagnosticId = "Serilog003";
+        public const string PropertyBindingDiagnosticId = "StructuredLogger003";
         private static readonly LocalizableString PropertyBindingTitle = new LocalizableResourceString(nameof(Resources.PropertyBindingAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString PropertyBindingMessageFormat = new LocalizableResourceString(nameof(Resources.PropertyBindingAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString PropertyBindingDescription = new LocalizableResourceString(nameof(Resources.PropertyBindingAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
         private static DiagnosticDescriptor PropertyBindingRule = new DiagnosticDescriptor(PropertyBindingDiagnosticId, PropertyBindingTitle, PropertyBindingMessageFormat, "CodeQuality", DiagnosticSeverity.Error, isEnabledByDefault: true, description: PropertyBindingDescription);
 
-        public const string ConstantMessageTemplateDiagnosticId = "Serilog004";
+        public const string ConstantMessageTemplateDiagnosticId = "StructuredLogger004";
         private static readonly LocalizableString ConstantMessageTemplateTitle = new LocalizableResourceString(nameof(Resources.ConstantMessageTemplateAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString ConstantMessageTemplateMessageFormat = new LocalizableResourceString(nameof(Resources.ConstantMessageTemplateAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString ConstantMessageTemplateDescription = new LocalizableResourceString(nameof(Resources.ConstantMessageTemplateAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
         private static DiagnosticDescriptor ConstantMessageTemplateRule = new DiagnosticDescriptor(ConstantMessageTemplateDiagnosticId, ConstantMessageTemplateTitle, ConstantMessageTemplateMessageFormat, "CodeQuality", DiagnosticSeverity.Warning, isEnabledByDefault: true, description: ConstantMessageTemplateDescription);
 
-        public const string UniquePropertyNameDiagnosticId = "Serilog005";
+        public const string UniquePropertyNameDiagnosticId = "StructuredLogger005";
         private static readonly LocalizableString UniquePropertyNameTitle = new LocalizableResourceString(nameof(Resources.UniquePropertyNameAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString UniquePropertyNameMessageFormat = new LocalizableResourceString(nameof(Resources.UniquePropertyNameAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString UniquePropertyNameDescription = new LocalizableResourceString(nameof(Resources.UniquePropertyNameAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
         private static DiagnosticDescriptor UniquePropertyNameRule = new DiagnosticDescriptor(UniquePropertyNameDiagnosticId, UniquePropertyNameTitle, UniquePropertyNameMessageFormat, "CodeQuality", DiagnosticSeverity.Error, isEnabledByDefault: true, description: UniquePropertyNameDescription);
 
-        public const string PascalPropertyNameDiagnosticId = "Serilog006";
+        public const string PascalPropertyNameDiagnosticId = "StructuredLogger006";
         private static readonly LocalizableString PascalPropertyNameTitle = new LocalizableResourceString(nameof(Resources.PascalPropertyNameAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString PascalPropertyNameMessageFormat = new LocalizableResourceString(nameof(Resources.PascalPropertyNameAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString PascalPropertyNameDescription = new LocalizableResourceString(nameof(Resources.PascalPropertyNameAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
         private static DiagnosticDescriptor PascalPropertyNameRule = new DiagnosticDescriptor(PascalPropertyNameDiagnosticId, PascalPropertyNameTitle, PascalPropertyNameMessageFormat, "CodeQuality", DiagnosticSeverity.Warning, isEnabledByDefault: true, description: PascalPropertyNameDescription);
 
-        public const string DestructureAnonymousObjectsDiagnosticId = "Serilog007";
+        public const string DestructureAnonymousObjectsDiagnosticId = "StructuredLogger007";
         private static readonly LocalizableString DestructureAnonymousObjectsTitle = new LocalizableResourceString(nameof(Resources.DestructureAnonymousObjectsAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString DestructureAnonymousObjectsMessageFormat = new LocalizableResourceString(nameof(Resources.DestructureAnonymousObjectsAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString DestructureAnonymousObjectsDescription = new LocalizableResourceString(nameof(Resources.DestructureAnonymousObjectsAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
         private static DiagnosticDescriptor DestructureAnonymousObjectsRule = new DiagnosticDescriptor(DestructureAnonymousObjectsDiagnosticId, DestructureAnonymousObjectsTitle, DestructureAnonymousObjectsMessageFormat, "CodeQuality", DiagnosticSeverity.Warning, isEnabledByDefault: true, description: DestructureAnonymousObjectsDescription);
 
-        public const string UseCorrectContextualLoggerDiagnosticId = "Serilog008";
+        public const string UseCorrectContextualLoggerDiagnosticId = "StructuredLogger008";
         private static readonly LocalizableString UseCorrectContextualLoggerTitle = new LocalizableResourceString(nameof(Resources.UseCorrectContextualLoggerAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString UseCorrectContextualLoggerMessageFormat = new LocalizableResourceString(nameof(Resources.UseCorrectContextualLoggerAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString UseCorrectContextualLoggerDescription = new LocalizableResourceString(nameof(Resources.UseCorrectContextualLoggerAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
@@ -77,7 +77,7 @@ namespace SerilogAnalyzer
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(ExceptionRule, TemplateRule, PropertyBindingRule, ConstantMessageTemplateRule, UniquePropertyNameRule, PascalPropertyNameRule, DestructureAnonymousObjectsRule, UseCorrectContextualLoggerRule);
 
-        private const string ILogger = "Serilog.ILogger";
+        private const string ILogger = "Core.Interfaces.IStructuredLogger";
         private const string ForContext = "ForContext";
 
         public override void Initialize(AnalysisContext context)

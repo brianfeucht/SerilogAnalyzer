@@ -33,7 +33,7 @@ namespace SerilogAnalyzer
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(SerilogAnalyzerAnalyzer.UseCorrectContextualLoggerDiagnosticId); }
+            get { return ImmutableArray.Create(StructuredLoggerAnalyzer.UseCorrectContextualLoggerDiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()

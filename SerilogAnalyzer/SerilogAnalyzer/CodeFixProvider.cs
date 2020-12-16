@@ -31,7 +31,7 @@ namespace SerilogAnalyzer
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(SerilogAnalyzerAnalyzer.ExceptionDiagnosticId); }
+            get { return ImmutableArray.Create(StructuredLoggerAnalyzer.ExceptionDiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()
